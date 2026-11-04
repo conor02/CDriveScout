@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; img-src 'self' data:">
+<title>C 盘透视</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="logo">C:</div>
+      <div class="brand-text">
+        <div class="brand-name">C 盘透视</div>
+        <div class="brand-sub">扫描分析 · 操作前二次确认</div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="drive">扫描盘符</label>
+      <select id="drive"></select>
+    </div>
+
+    <div class="field">
+      <label for="minSize">只列出大于</label>
+      <select id="minSize">
+        <option value="0">全部文件</option>
+        <option value="1048576">1 MB</option>
+        <option value="5242880" selected>5 MB</option>
+        <option value="10485760">10 MB</option>
+        <option value="52428800">50 MB</option>
+        <option value="104857600">100 MB</option>
+      </select>
+    </div>
+
+    <label class="check">
+      <input type="checkbox" id="skipSystem">
+      <span>跳过系统目录（更快，仅统计用户区）</span>
+    </label>
+
+    <label class="check">
+      <input type="checkbox" id="hideSystem" checked>
+      <span>列表中隐藏「系统保护区」文件</span>
+    </label>
+
+    <div class="scan-actions">
+      <button id="btnScan" class="btn primary">开始扫描</button>
+      <button id="btnStop" class="btn ghost" disabled>停止</button>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section-title">按分类筛选</div>
+    <div class="chips" id="chips"></div>
+
+    <div class="field search-field">
+      <label for="search">搜索路径</label>
+      <input id="search" type="search" placeholder="如 AppData、微信、node_modules" autocomplete="off">
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section-title">导出</div>
+    <button id="btnCsv" class="btn ghost full">导出 CSV（当前筛选）</button>
+    <button id="btnHtml" class="btn ghost full">导出 HTML 报告</button>
+    <button id="btnRules" class="link">打开规则文件</button>
+    <button id="btnReload" class="link">重新加载规则</button>
+
+    <div class="footnote">
+      勾选后可「移到回收站」或「迁移到…」。<br>
+      两次确认，受保护目录不可勾选。
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="kpis" id="kpis"></header>
+
+    <div class="toolbar">
+      <div class="tabs">
+        <button class="tab active" data-tab="files">文件排行</button>
+        <button class="tab" data-tab="dirs">目录占用</button>
+      </div>
+      <div class="result-meta" id="resultMeta">尚未扫描</div>
+    </div>
+
+    <div class="selbar" id="selBar">
+      <div class="sel-info">已选 <b id="selCount">0</b> 项 · <b id="selSize">0 B</b></div>
+      <div class="sel-actions">
+        <button class="btn ghost small" id="btnClearSel">清除选择</button>
+        <button class="btn warn small" id="btnTrash">移到回收站</button>
+        <button class="btn accent small" id="btnMigrate">迁移到…</button>
+      </div>
+    </div>
+
+    <section class="panel" id="panel-files">
+      <div class="thead" id="thead">
+        <div class="th pick"><input type="checkbox" id="ckAll" title="全选当前筛选结果"></div>
+        <div class="th" data-key="s">大小</div>
+        <div class="th" data-key="c">分类</div>
+        <div class="th" data-key="a">建议</div>
+        <div class="th" data-key="p">路径</div>
+        <div class="th" data-key="m">修改时间</div>
+      </div>
+      <div class="tbody" id="tbody">
+        <div class="spacer" id="spacer"></div>
+        <div class="empty" id="empty">
+          <div class="empty-title">还没有数据</div>
+          <div class="empty-sub">选好盘符和体积门槛，点左侧「开始扫描」</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel hidden" id="panel-dirs">
+      <div class="thead dirs-head">
+        <div class="th">目录</div>
+        <div class="th">占用</div>
+        <div class="th">占比</div>
+      </div>
+      <div class="dirs-body" id="dirsBody"></div>
+    </section>
+
+    <footer class="status">
+      <span id="statusText">就绪</span>
+      <span id="statusRight"></span>
+    </footer>
+  </main>
+</div>
+
+<div class="ctx" id="ctxMenu">
+  <div class="ctx-item" data-act="reveal">在资源管理器中显示</div>
+  <div class="ctx-item" data-act="copy">复制完整路径</div>
+  <div class="ctx-sep"></div>
+  <div class="ctx-item" data-act="trash">移到回收站…</div>
+  <div class="ctx-item" data-act="migrate">迁移到其他盘…</div>
+</div>
+
+<div class="overlay" id="overlay">
+  <div class="dialog" id="dialog">
+    <div class="dialog-head">
+      <div class="dialog-title" id="dlgTitle"></div>
+      <button class="dialog-x" id="dlgX" title="关闭">×</button>
+    </div>
+    <div class="dialog-body" id="dlgBody"></div>
+    <div class="dialog-foot" id="dlgFoot"></div>
+  </div>
+</div>
+
+<script src="renderer.js"></script>
+</body>
+</html>

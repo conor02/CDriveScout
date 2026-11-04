@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="300" viewBox="0 0 1200 300" role="img" aria-label="CDriveScout — C 盘透视">
+  <defs>
+    <clipPath id="panel">
+      <rect x="40" y="38" width="1120" height="224" rx="20"/>
+    </clipPath>
+    <linearGradient id="fade" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#185FA5" stop-opacity="0.10"/>
+      <stop offset="1" stop-color="#185FA5" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="300" fill="#F5F5F2"/>
+
+  <g clip-path="url(#panel)">
+    <rect x="40" y="38" width="1120" height="224" fill="#FFFFFF"/>
+    <rect x="40" y="38" width="1120" height="224" fill="url(#fade)"/>
+
+    <!-- 背景网格，呼应表格行 -->
+    <g stroke="#EDECE7" stroke-width="1">
+      <line x1="40" y1="126" x2="1160" y2="126"/>
+      <line x1="40" y1="170" x2="1160" y2="170"/>
+      <line x1="40" y1="214" x2="1160" y2="214"/>
+    </g>
+  </g>
+  <rect x="40.5" y="38.5" width="1119" height="223" rx="20" fill="none" stroke="#E6E5E0"/>
+
+  <!-- 图标 -->
+  <rect x="78" y="83" width="66" height="66" rx="16" fill="#185FA5"/>
+  <text x="111" y="126" text-anchor="middle" font-family="Consolas, 'Courier New', monospace"
+        font-size="30" font-weight="700" fill="#FFFFFF">C:</text>
+
+  <!-- 标题 -->
+  <text x="166" y="118" font-family="'Segoe UI', system-ui, -apple-system, 'Microsoft YaHei', sans-serif"
+        font-size="46" font-weight="700" fill="#2C2C2A" letter-spacing="-1.2">CDriveScout</text>
+  <text x="168" y="152" font-family="'Microsoft YaHei', 'Segoe UI', system-ui, sans-serif"
+        font-size="18" fill="#6B6A64">C 盘透视 · 看得清，才敢删</text>
+
+  <!-- 特性标签 -->
+  <g font-family="'Microsoft YaHei', 'Segoe UI', system-ui, sans-serif" font-size="14">
+    <rect x="168" y="182" width="96" height="30" rx="15" fill="#E6F1FB"/>
+    <text x="216" y="202" text-anchor="middle" fill="#185FA5">全盘扫描</text>
+
+    <rect x="276" y="182" width="96" height="30" rx="15" fill="#E6F1FB"/>
+    <text x="324" y="202" text-anchor="middle" fill="#185FA5">五档分类</text>
+
+    <rect x="384" y="182" width="130" height="30" rx="15" fill="#E6F1FB"/>
+    <text x="449" y="202" text-anchor="middle" fill="#185FA5">两次确认</text>
+
+    <rect x="526" y="182" width="142" height="30" rx="15" fill="#E6F1FB"/>
+    <text x="597" y="202" text-anchor="middle" fill="#185FA5">只进回收站</text>
+  </g>
+
+  <!-- 右侧说明 -->
+  <g font-family="'Microsoft YaHei', 'Segoe UI', system-ui, sans-serif">
+    <text x="1120" y="106" text-anchor="end" font-size="13" fill="#8A8880">Windows 磁盘空间分析与处置</text>
+    <text x="1120" y="132" text-anchor="end" font-size="13" fill="#8A8880">规则外置 · 复制校验后才动原件</text>
+    <text x="1120" y="214" text-anchor="end" font-size="12" fill="#B3B1A9">MIT License · Electron</text>
+  </g>
+</svg>

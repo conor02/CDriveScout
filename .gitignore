@@ -1,0 +1,22 @@
+# 依赖与构建产物
+node_modules/
+release/
+release-bad/
+dist/
+build-test/
+.build-staging/
+
+# 测试与截图脚本的产物（文档截图在 docs/images/ 里，是要提交的）
+test/shot*.png
+test/e2e-*.png
+test/_*.png
+test/sample-export.csv
+test/sample-report.html
+
+# 系统与编辑器
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log
+.idea/
+.vscode/

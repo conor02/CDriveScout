@@ -1,0 +1,44 @@
+{
+  "name": "cdrive-scout",
+  "productName": "CDriveScout",
+  "version": "1.1.0",
+  "description": "C 盘透视 - 全盘空间分析，五档分类给处置建议，支持移到回收站与跨盘迁移（两次确认）",
+  "main": "main.js",
+  "author": "conor02",
+  "license": "MIT",
+  "homepage": "https://github.com/conor02/CDriveScout#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/conor02/CDriveScout.git"
+  },
+  "bugs": {
+    "url": "https://github.com/conor02/CDriveScout/issues"
+  },
+  "keywords": [
+    "disk-space",
+    "disk-cleanup",
+    "windows",
+    "electron",
+    "recycle-bin",
+    "file-migration",
+    "windirstat"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "electron .",
+    "build:exe": "node scripts/build.js",
+    "test": "node test/test-rules.js && node test/test-ops.js && node test/test-worker.js && node test/test-report.js",
+    "test:rules": "node test/test-rules.js",
+    "test:ops": "node test/test-ops.js",
+    "test:worker": "node test/test-worker.js",
+    "scan": "node test/test-scan.js",
+    "e2e": "node test/e2e-ops.js 9335 all",
+    "demo": "node test/make-demo-files.js && node test/demo-shot.js 9338"
+  },
+  "devDependencies": {
+    "@electron/packager": "^20.3.0",
+    "electron": "^45.2.2"
+  }
+}
